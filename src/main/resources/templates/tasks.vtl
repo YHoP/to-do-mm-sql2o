@@ -1,0 +1,42 @@
+<h1>Task list!</h1>
+
+<div>
+<form action="/tasks" method="post">
+  <label for="description">Add Task Description</label>
+  <input id="description" name="description" type="text">
+
+  <button type="submit">Add task</button>
+</form>
+</div>
+
+<div>
+#foreach ($task in $tasks)
+
+    <form action="/complete_tasks/$task.getId()" method="post">
+    #if($task.getComplete())
+    <input type="checkbox" name="complete" checked="yes" value="$task.getComplete()"/>
+    <a href="/tasks/$task.getId()">$task.getDescription()</a>
+
+    #else
+    <input type="checkbox" name="complete" value="$task.getComplete()"/>
+    <a href="/tasks/$task.getId()">$task.getDescription()</a>
+    <button type="submit" >Done!</button>
+    #end
+  </form>
+
+#end
+</div>
+
+<div>
+  <form action="/delete_tasks" method="post">
+    <label for="task_id">Delete a task</label>
+      <select id='task_id' name='task_id' type='text'>
+        #foreach($task in $tasks)
+          <option value="$task.getId()"> $task.getDescription() </option>
+        #end
+      </select>
+    <button type="submit">Delete</button>
+  </form>
+</div>
+
+<div><a href='/'>Home</a></div>

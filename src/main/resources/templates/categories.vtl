@@ -1,0 +1,29 @@
+<h1>Your Categories!</h1>
+
+#foreach ($category in $categories)
+  <li><a href="/categories/$category.getId()">$category.getName()</a></li>
+#end
+
+<div>
+  <form action="/categories" method="post">
+    <label for="name">Add a category</label>
+    <input id="name" name="name" type="text">
+
+    <button type="submit">Add</button>
+  </form>
+</div>
+<p> </p>
+<div>
+  <form action="/delete_categories" method="post">
+    <label for="category_id">Delete a category</label>
+      <select id='category_id' name='category_id' type='text'>
+        #foreach($category in $categories)
+          <option value="$category.getId()"> $category.getName() </option>
+        #end
+      </select>
+    <button type="submit">Delete</button>
+  </form>
+</div>
+
+
+<p><a href='/'>Home</a></p>
